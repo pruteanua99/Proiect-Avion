@@ -23,7 +23,7 @@ x += 1
 hangare = []
 hangare.append(Hangar(x+1))
 # endregion Setare
-
+print("MODIFICAT")
 
 while True:
     clear_console()
