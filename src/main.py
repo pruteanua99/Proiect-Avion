@@ -1,5 +1,5 @@
 import datetime
-
+from pentruBD.forConnection import airportBD as airBD
 from main_auto import clear_console
 from utility.Serializare import Serizalizare_v2
 from avioane.TipAvion import AvionDomestic, AvionInternational
@@ -17,13 +17,13 @@ for i in range(3):
     x = x+1
 
 portiInternationale = []
-
+airbdd = airBD()
 portiInternationale.append(intGate(x+1))
 x += 1
 hangare = []
 hangare.append(Hangar(x+1))
 # endregion Setare
-print("MODIFICAT")
+
 
 while True:
     clear_console()
@@ -53,10 +53,11 @@ while True:
                         listaObiecte.append(airplane)
                         atribute = airplane.Transformare()
                         listaAvioane.append(atribute)
+                        airbdd.historyRegister(airplane,poarta)
                         z = "000"
                         print("\n"+"S-a inregistrat! "+"\n")
                         input("Press Enter to cont1inue...")
-                    break
+                        break
                 if z == "1":
                     print("Nu sunt porti disponibile pentru zboruri domestice...")
                     input("Press enter...")
@@ -70,6 +71,7 @@ while True:
                         listaObiecte.append(airplane)
                         atribute = airplane.Transformare()
                         listaAvioane.append(atribute)
+                        airbdd.historyRegister(airplane,poarta)
                         z = "000"
                         print("\n"+"S-a inregistrat! "+"\n")
                         input("Press Enter to cont1inue...")
@@ -109,6 +111,7 @@ while True:
                             if hangar.Ocupat.IdNum == listaObiecte[z-1].IdNum:
                                 hangar.Ocupat = None
                             break
+                    airbdd.plecareAvion(listaObiecte[z-1])
                     del listaObiecte[z-1]
                     del listaAvioane[z-1]
                     break

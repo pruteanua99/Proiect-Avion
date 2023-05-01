@@ -1,5 +1,5 @@
 from utility.Decorator import Cached
-# can't use Pydentic due to the __init__ Error
+
 
 
 class Avion ():
@@ -15,7 +15,7 @@ class Avion ():
         self.IdNum = input("Numar Identificare aeronava: ")
         self.Model = input("Model aeronava: ")
         self.sursa = input("Sursa:  ")
-        self.destinatia = input("Destinatia: ")
+        
 
     def Aterizare(self):
 
@@ -46,3 +46,21 @@ class Avion ():
     @Cached
     def Transformare(self):
         return [{"IdNum: ": self.IdNum}, {"Model: ": self.Model}, {"Sursa: ": self.sursa}, {"Destinatia: ": self.destinatia}, {"Motiv aterizare: ": self.motiv}, {"Pista folosita la aterizare: ": self.Pista}, {"Ora aterizare: ": self.OraAterizare}]
+    
+
+    # def insertAvionBD(self):
+    #     conexion = conexiune()
+    #     conn=conexion.getConnection()
+    #     cursor = conn.cursor()
+    #     sql="SELECT Avion_NrIdentificare from avioane where Avion_NrIdentificare = ?"
+    #     val = (self.IdNum,)
+    #     cursor.execute(sql, val)
+    #     rand = cursor.fetchone()    
+    #     if rand is not None:
+    #         return False  #s-a gasit avionul in bd
+    #     else:
+    #         sql="INSERT INTO avioane(Avion_NrIdentificare,Model) values (?, ?)"
+    #         val = (self.IdNum, self.Model)
+    #         cursor.execute(sql, val)
+    #         conn.commit()
+    #         return True #nu s-a gasit avionul in bd
