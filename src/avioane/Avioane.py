@@ -1,10 +1,10 @@
 from utility.Decorator import Cached
-
+import datetime
 
 
 class Avion ():
 
-    IdNum: int
+    IdNum: str
     Model: str
     sursa: str
     destinatia: str
@@ -34,7 +34,7 @@ class Avion ():
 
         if x == "3":
             self.motiv = "Urgenta"
-        self.OraAterizare = input("\nOra aterizarii:")
+        #self.OraAterizare = input("\nOra aterizarii:")
         print("-"*50 + "\n")
         print("Pista folosita (1, 2): ")
         x = input()
@@ -45,22 +45,9 @@ class Avion ():
 
     @Cached
     def Transformare(self):
-        return [{"IdNum: ": self.IdNum}, {"Model: ": self.Model}, {"Sursa: ": self.sursa}, {"Destinatia: ": self.destinatia}, {"Motiv aterizare: ": self.motiv}, {"Pista folosita la aterizare: ": self.Pista}, {"Ora aterizare: ": self.OraAterizare}]
+        now = datetime.datetime.now()
+        current_time = now.strftime("%H:%M:%S")
+        return [{"IdNum: ": self.IdNum}, {"Model: ": self.Model}, {"Sursa: ": self.sursa}, {"Destinatia: ": self.destinatia}, {"Motiv aterizare: ": self.motiv}, {"Pista folosita la aterizare: ": self.Pista}, {"Ora aterizare: ": current_time }]
     
 
-    # def insertAvionBD(self):
-    #     conexion = conexiune()
-    #     conn=conexion.getConnection()
-    #     cursor = conn.cursor()
-    #     sql="SELECT Avion_NrIdentificare from avioane where Avion_NrIdentificare = ?"
-    #     val = (self.IdNum,)
-    #     cursor.execute(sql, val)
-    #     rand = cursor.fetchone()    
-    #     if rand is not None:
-    #         return False  #s-a gasit avionul in bd
-    #     else:
-    #         sql="INSERT INTO avioane(Avion_NrIdentificare,Model) values (?, ?)"
-    #         val = (self.IdNum, self.Model)
-    #         cursor.execute(sql, val)
-    #         conn.commit()
-    #         return True #nu s-a gasit avionul in bd
+   
