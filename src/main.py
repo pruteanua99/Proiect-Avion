@@ -5,8 +5,6 @@ from utility.Serializare import Serizalizare_v2
 from avioane.TipAvion import AvionDomestic, AvionInternational
 from porti.PortiSeparate import Hangar, domGate, intGate
 
-
-
 # region Setare
 listaAvioane = []
 listaObiecte = []
@@ -15,7 +13,6 @@ x = 0
 for i in range(3):
     portiDomestice.append(domGate(i+1))
     x = x+1
-
 portiInternationale = []
 airbdd = airBD()
 portiInternationale.append(intGate(x+1))
@@ -23,11 +20,8 @@ x += 1
 hangare = []
 hangare.append(Hangar(x+1))
 # endregion Setare
-
-
 while True:
     clear_console()
-
     print("-"*50 + "\n")
     print("Selectati actiunea dorita:")
     print("\n")
@@ -86,7 +80,6 @@ while True:
         if len(listaObiecte) == 0:
             print("Nu sunt avioane in aeroport...")
             input("Apasa enter pentru a continua.")
-
         else:
             print("Selectati aeronava care a parasit aeroportul:")
             i = 1
@@ -115,7 +108,6 @@ while True:
                     del listaObiecte[z-1]
                     del listaAvioane[z-1]
                     break
-
             print("Avioane ramase in aeroport: ")
             i = 1
             for avion in listaObiecte:
@@ -162,4 +154,3 @@ while True:
             elif x == "n" or x == "N":
                 break
     # endregion
-

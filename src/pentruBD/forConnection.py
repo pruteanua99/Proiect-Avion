@@ -1,12 +1,48 @@
-#import mysql.connector
+from typing import List
 import sqlalchemy as sqlal
 from datetime import datetime,date
+from model.modelAvion import Avion
 from utility.Decorator import singleton
+from storage.base import StorageObject
+from model.modelAvion import Avion
+
 
 @singleton
-class airportBD():
+class airportBD(StorageObject):
     def __init__(self):
+        self.listAvioane=[]
         pass
+    
+    # def get_all_planes(self) -> List[Avion]:
+    #     #try:
+    #         print(1)
+    #         url = 'mysql+pymysql://root:@localhost/proiectavioane'
+    #         print(2)
+    #         engine = sqlal.create_engine(url)
+    #         print(3)
+            # conn = engine.connect()
+            # print(4)
+            # table = sqlal.Table('avioane', sqlal.MetaData(), autoload_with=engine)
+            # print(5)
+            # sql = sqlal.select(table.columns)
+            # print(6)
+            # result = conn.execute(sql)
+            # print(7)
+        #     for row in result:
+        #         idUnic= row[0]
+        #         numeAvion = row[1]
+        #         model = row[2]
+        #         avion=Avion(idUnic,numeAvion,model)
+        #         self.listAvioane.append(avion)
+        # except Exception as e:
+        #     print("Probleme la functia get_all_planes.")
+        #     print(e)
+        # finally:
+        #     #self.closeAll(conn,engine)
+        #     return self.listAvioane
+        
+    
+
     def historyRegister(self,avion: object, poarta: object):
         try:
             url = 'mysql+pymysql://root:@localhost/proiectavioane'
