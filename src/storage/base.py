@@ -1,17 +1,28 @@
 from abc import ABC, abstractmethod
 from typing import List
-from model import modelAvion as Avion
-from porti.Aeroport import locParcare
-import pymysql
-import datetime
 
 
 class StorageObject(ABC):
     
-    # @abstractmethod
-    # def get_gate_by_Id(self, gate_id: int) -> locParcare:
-    #     raise NotImplementedError("Functia get_gate_by_Id neimplementata")
+    @abstractmethod
+    def get_gate_by_Id(self, gate_id: int) -> List[object]:
+        raise NotImplementedError("Functia get_gate_by_Id neimplementata")
     
+    @abstractmethod
+    def del_gate(self, gate_id: int) -> List[object]:
+        raise NotImplementedError("Functia del_gate neimplementata")
+
+    @abstractmethod
+    def get_gates(self) -> List[object]:
+        raise NotImplementedError("Functia get_gates neimplementata")
+    
+    @abstractmethod
+    def put_gate(self, poarta: object) -> List[object]:
+        raise NotImplementedError("Functia put_gate neimplementata")
+    
+    @abstractmethod
+    def update_gate(self, gate_id: int, poarta: object) -> List[object]:
+        raise NotImplementedError("Functia update_gate neimplementata")
     
     @abstractmethod
     def get_all_planes(self) -> List[object]:
@@ -25,30 +36,26 @@ class StorageObject(ABC):
     def put_plane(self, object: object) -> bool:
         raise NotImplementedError("Functia add_plane neimplementata")
     
-    # @abstractmethod
-    # def get_runway_by_id(self, runway_id: int) -> int:
-    #     raise NotImplementedError("Functia get_runway_by_id neimplementata")
-    
-    # @abstractmethod
-    # def get_history_by_NrId(self , nrIdentificare: str) -> dict:
-    #     raise NotImplementedError("Fuctia get_history_by_NrId neimplementata")
-    
-    # @abstractmethod
-    # def get_history_by_Date  (self, data: datetime) -> dict:
-    #     raise ("Functia get_history_by_date neimplementata")
-    
-    # @abstractmethod
-    # def del_plane_by_NrId(self, avion_Id: int) -> bool:
-    #     raise ("Functia del_plane_by_NrId neimplementata")
-    
-    # @abstractmethod
-    # def has_plane_by_NrId(self, avion_Id: int) -> bool:
-    #     raise ("Functia has_plane_by_NrId neimplementata")
-    
-    # @abstractmethod
-    # def set_plane_by_NrId(self, plane: Avion) -> bool:
-    #     raise ("Functia has_plane_by_NrId neimplementata")
+    @abstractmethod
+    def get_runway_by_id(self, runway_id: int) -> List[object]:
+        raise NotImplementedError("Functia get_runway_by_id neimplementata")
 
+    @abstractmethod
+    def get_runways(self) -> List[object]:
+        raise NotImplementedError("Functia get_runways neimplementata.")
+    
+    @abstractmethod 
+    def put_runway(self, object:object) -> List[object]:
+        raise NotImplementedError("Functia put_runway neimplementata.")
+    
+    @abstractmethod
+    def del_runway_by_id(self, runway_id: int) -> List[object]:
+        raise NotImplementedError("Functia del_runway neimplementata")
+    
+    @abstractmethod
+    def get_history_by_NrId(self , nrIdentificare: str) -> List[object]:
+        raise NotImplementedError("Fuctia get_history_by_NrId neimplementata")
+    
 class Singleton(object):
     
     def __new__(cls):
