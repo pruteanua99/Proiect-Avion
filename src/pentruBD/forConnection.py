@@ -8,7 +8,7 @@ from model.modelGate import Gate
 from model.modelHistory import History
 from model.modelRunway import runway
 
-
+#Connection class for API and local app
 @singleton
 class airportBD(StorageObject):
     def __init__(self):
@@ -16,6 +16,7 @@ class airportBD(StorageObject):
         self.listaPiste = []
         self.listaPorti = []
         self.listaIstoric = []
+        #change url for docker (first) and local app (second)
         self.url = 'mysql+pymysql://root:@host.docker.internal/proiectavioane'
         #self.url = 'mysql+pymysql://root:@localhost/proiectavioane'
         self.engine = sqlal.create_engine(self.url)
