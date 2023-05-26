@@ -17,8 +17,8 @@ class airportBD(StorageObject):
         self.listaPorti = []
         self.listaIstoric = []
         #change url for docker (first) and local app (second)
-        self.url = 'mysql+pymysql://root:@host.docker.internal/proiectavioane'
-        #self.url = 'mysql+pymysql://root:@localhost/proiectavioane'
+        #self.url = 'mysql+pymysql://root:@host.docker.internal/proiectavioane'
+        self.url = 'mysql+pymysql://root:@localhost/proiectavioane'
         self.engine = sqlal.create_engine(self.url)
         self.conn = self.engine.connect()
     #region mainUsage

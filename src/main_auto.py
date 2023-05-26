@@ -2,7 +2,6 @@ import os
 import random
 import threading
 import time
-
 from porti.PortiSeparate import Hangar, domGate, intGate
 
 
@@ -56,7 +55,8 @@ def decoleaza(portiDomestice: list) -> None:
     time.sleep(3)
 
     for i in range(cate1):
-        porti_de_eliberat = [i for i in range(len(portiDomestice)) if portiDomestice[i].Ocupat is True]
+        porti_de_eliberat = [i for i in range(
+            len(portiDomestice)) if portiDomestice[i].Ocupat is True]
         if len(porti_de_eliberat) > 0:
             portiDomestice[porti_de_eliberat[0]].Ocupat = None
             print(f"Poarta {i+1} eliberata.")
@@ -72,7 +72,8 @@ def autoCreate(portiDomestice: list, piste: list, procese: list) -> None:
             counter += 1
 
     if cate > counter:
-        print(f"{cate-counter} avioane nu au loc de parcare pentru a ateriza... Restul incep aterizarea")
+        print(
+            f"{cate-counter} avioane nu au loc de parcare pentru a ateriza... Restul incep aterizarea")
         time.sleep(3)
         for i in range(counter):
             thread = threading.Thread(target=aterizeaza, args=(piste,))
@@ -99,6 +100,7 @@ def autoCreate(portiDomestice: list, piste: list, procese: list) -> None:
 
 
 if __name__ == "__main__":
+
     while True:
 
         clear_console()
