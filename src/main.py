@@ -5,6 +5,7 @@ from utility.Serializare import Serizalizare_v2
 from avioane.TipAvion import AvionDomestic, AvionInternational
 from porti.PortiSeparate import Hangar, domGate, intGate
 from GUI.window import Visual
+import time
 
 import threading
 
@@ -45,8 +46,10 @@ def main():
                 print("Selectati tipul zborului: 1-> Domestic    2 -> International")
                 z = input()
                 if z == "1":
-                    for poarta in portiDomestice:
+                    for index, poarta in enumerate(portiDomestice):
                         if poarta.Ocupat is None:
+                            obj.listaElButon[0].changeRED()
+
                             print("-"*50 + "\n")
                             airplane = AvionDomestic()
                             poarta.parcare_avion(airplane)
@@ -55,6 +58,18 @@ def main():
                             atribute = airplane.Transformare()
                             listaAvioane.append(atribute)
                             airbdd.historyRegister(airplane, poarta)
+                            if airplane.Pista == "1":
+                                obj.listaElPiste[0].changeRED()
+                            if airplane.Pista == "2":
+                                obj.listaElPiste[1].changeRED()
+                            time.sleep(2)
+                            if airplane.Pista == "1":
+                                obj.listaElPiste[0].changeGREEN()
+                            if airplane.Pista == "2":
+                                obj.listaElPiste[1].changeGREEN()
+                            obj.listaElPorti[index].changeRED()
+                            obj.listaElButon[0].changeGREEN()
+                            obj.lista_ref_NO[index] = airplane.IdNum
                             z = "000"
                             print("\n"+"S-a inregistrat! "+"\n")
                             input("Press Enter to cont1inue...")
@@ -64,8 +79,9 @@ def main():
                         input("Press enter...")
                     break
                 if z == "2":
-                    for poarta in portiInternationale:
+                    for index, poarta in enumerate(portiInternationale):
                         if poarta.Ocupat is None:
+                            obj.listaElButon[0].changeRED()
                             airplane = AvionInternational()
                             poarta.parcare_avion(airplane)
                             airplane.Aterizare()
@@ -73,6 +89,18 @@ def main():
                             atribute = airplane.Transformare()
                             listaAvioane.append(atribute)
                             airbdd.historyRegister(airplane, poarta)
+                            if airplane.Pista == "1":
+                                obj.listaElPiste[0].changeRED()
+                            if airplane.Pista == "2":
+                                obj.listaElPiste[1].changeRED()
+                            time.sleep(2)
+                            if airplane.Pista == "1":
+                                obj.listaElPiste[0].changeGREEN()
+                            if airplane.Pista == "2":
+                                obj.listaElPiste[1].changeGREEN()
+                            obj.listaElPorti[3].changeRED()
+                            obj.listaElButon[0].changeGREEN()
+                            obj.lista_ref_NO[3] = airplane.IdNum
                             z = "000"
                             print("\n"+"S-a inregistrat! "+"\n")
                             input("Press Enter to cont1inue...")
@@ -88,6 +116,7 @@ def main():
                 print("Nu sunt avioane in aeroport...")
                 input("Apasa enter pentru a continua.")
             else:
+                obj.listaElButon[1].changeRED()
                 print("Selectati aeronava care a parasit aeroportul:")
                 i = 1
                 for avion in listaObiecte:
@@ -99,17 +128,23 @@ def main():
                         ora_curenta = datetime.datetime.now().strftime("%H:%M:%S")
                         print("Aeronava cu numarul: ",
                               listaObiecte[z-1].IdNum, " a parasit aeroportul la ora: ", ora_curenta)
-                        for poarta in portiDomestice:
+                        for index, poarta in enumerate(portiDomestice):
                             if poarta.Ocupat is not None and poarta.Ocupat.IdNum == listaObiecte[z-1].IdNum:
+                                obj.listaElPorti[index].changeGREEN()
+                                obj.lista_ref_NO[index] = None
                                 poarta.Ocupat = None
                                 break
                         for poarta in portiInternationale:
                             if poarta.Ocupat is not None and poarta.Ocupat.IdNum == listaObiecte[z-1].IdNum:
+                                obj.listaElPorti[3].changeGREEN()
+                                obj.lista_ref_NO[3] = None
                                 poarta.Ocupat = None
                                 break
                         for hangar in hangare:
                             if hangar.Ocupat is not None and hangar.Ocupat.IdNum == listaObiecte[z-1].IdNum:
                                 if hangar.Ocupat.IdNum == listaObiecte[z-1].IdNum:
+                                    obj.listaElHangar[0].changeGREEN()
+                                    obj.lista_ref_NO[4] = None
                                     hangar.Ocupat = None
                                 break
                         airbdd.plecareAvion(listaObiecte[z-1])
@@ -121,6 +156,7 @@ def main():
                 for avion in listaObiecte:
                     print(i, " -> " + avion.IdNum)
                     i += 1
+                obj.listaElButon[1].changeGREEN()
                 input("Apasa enter pentru a continua...")
         # endregion Plecare
         # region Avioare Avioane in Aeroport
@@ -149,6 +185,21 @@ def main():
                         print("Aeronava cu numarul: ",
                               listaObiecte[z-1].IdNum, " a fost trimisa in hangar  la ora: ", ora_curenta)
                         hangare[0].parcare_avion(listaObiecte[z-1])
+                        obj.listaElPorti[z - 1].changeGREEN()
+                        obj.lista_ref_NO[4] = listaObiecte[z-1].IdNum
+                        obj.listaElHangar[0].changeRED()
+                        for index, poarta in enumerate(portiDomestice):
+                            if poarta.Ocupat is not None and poarta.Ocupat.IdNum == listaObiecte[z-1].IdNum:
+                                obj.listaElPorti[index].changeGREEN()
+                                obj.lista_ref_NO[index] = None
+                                poarta.Ocupat = None
+                                break
+                        for poarta in portiInternationale:
+                            if poarta.Ocupat is not None and poarta.Ocupat.IdNum == listaObiecte[z-1].IdNum:
+                                obj.listaElPorti[3].changeGREEN()
+                                obj.lista_ref_NO[3] = None
+                                poarta.Ocupat = None
+                                break
                         input("Apasa enter...")
                         break
         # endregion La reparatii
@@ -172,3 +223,6 @@ if __name__ == "__main__":
 
     console_thread.start()
     pygame_thread.start()
+
+    console_thread.join()
+    pygame_thread.join()
