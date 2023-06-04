@@ -14,6 +14,7 @@ uvicorn = "^0.22.0"
 sqlalchemy = "^2.0.12"
 mysql-connector-python = "^8.0.33"
 pymysql = "^1.0.3"
+pygame = "^2.4.0"
 
 
 
